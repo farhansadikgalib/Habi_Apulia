@@ -1,9 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:habi_pulia/HomeScreen/HomePage.dart';
 import 'package:location/location.dart';
+
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -20,17 +21,17 @@ class _SplashPageState extends State<SplashPage> {
   late PermissionStatus _permissionGranted;
    late LocationData _locationData;
 
+  // final Connectivity _connectivity = Connectivity();
+  // late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+
+
 
   @override
-  void initState() {
-    // TODO: implement initState
-
-
+ initState() {
     super.initState();
     permissionController();
     location.enableBackgroundMode(enable: true);
-
-
     Timer(
         Duration(seconds: 3),
             () => Navigator.pushAndRemoveUntil(
@@ -39,7 +40,17 @@ class _SplashPageState extends State<SplashPage> {
                 builder: (context) => HomePage(url: 'https://habiapulia.com')),
                 (route) => false));
 
+    // initConnectivity();
+    // _connectivitySubscription =
+    //     _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+
+
+
+
   }
+
+
+
 
   Future<void> permissionController()async{
     _serviceEnabled = await location.serviceEnabled();
@@ -50,8 +61,6 @@ class _SplashPageState extends State<SplashPage> {
         return;
       }
     }
-
-
     _permissionGranted = await location.hasPermission();
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await location.requestPermission();
@@ -64,6 +73,33 @@ class _SplashPageState extends State<SplashPage> {
 
 
   }
+
+
+  // Future<void> initConnectivity() async {
+  //   late ConnectivityResult result;
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     result = await _connectivity.checkConnectivity();
+  //   } on PlatformException catch (e) {
+  //       print(e.toString());
+  //     return;
+  //   }
+  //
+  //   // If the widget was removed from the tree while the asynchronous platform
+  //   // message was in flight, we want to discard the reply rather than calling
+  //   // setState to update our non-existent appearance.
+  //   if (!mounted) {
+  //     return Future.value(null);
+  //   }
+  //
+  //   return _updateConnectionStatus(result);
+  // }
+  //
+  // Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+  //   setState(() {
+  //      _connectionStatus = result;
+  //   });
+  // }
 
 
   @override
