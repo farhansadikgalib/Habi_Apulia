@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:habi_pulia/SplashScreen/SplashPage.dart';
 
-void main() {
-  runApp(const MyApp());
+Future main() async {
+  runApp( MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
