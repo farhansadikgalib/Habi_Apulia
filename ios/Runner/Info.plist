@@ -25,6 +25,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>When in use permissions</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>always permissions</string>
+    <key>NSLocationAlwaysAndWhenInUsageDescription</key>
+    <string>Always and in usage permissions</string>
+
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
